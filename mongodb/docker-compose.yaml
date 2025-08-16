@@ -1,0 +1,34 @@
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root # test
+      MONGO_INITDB_ROOT_PASSWORD: password # test
+    volumes:
+      - mongo-data:/data/db
+      - mongo-config:/data/configdb
+    networks:
+      - apps-net
+
+networks:
+  apps-net:
+    internal: true
+    driver: bridge
+
+volumes:
+  mongo-config:
+    driver: local
+    driver_opts:
+      type: none
+      device: /opt/apps/mongodb/configdb
+      o: bind
+  mongo-data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /opt/apps/mongodb/db
+      o: bind
