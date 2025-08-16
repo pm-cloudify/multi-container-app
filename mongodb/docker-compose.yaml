@@ -16,7 +16,6 @@ services:
 
 networks:
   apps-net:
-    internal: true
     driver: bridge
 
 volumes:
