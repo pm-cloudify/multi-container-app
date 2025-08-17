@@ -9,7 +9,8 @@ import (
 func main() {
 	// TODO: load these configs from env
 	// init db connection
-	db.ConnectToDB("localhost:27017")
+	db.ConnectToDB("root:password@localhost:27017")
+	defer db.DisconnectDB()
 	db.PingDB()
 
 	// config routes
