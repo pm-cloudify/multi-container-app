@@ -93,7 +93,6 @@ func PostTodo(c *gin.Context) {
 
 // Put /todos/:id
 func PutTodo(c *gin.Context) {
-
 	id := c.Param("id")
 
 	objectID, err := bson.ObjectIDFromHex(id)
@@ -142,7 +141,32 @@ func PutTodo(c *gin.Context) {
 
 // DELETE /todos/:id
 func DeleteTodo(c *gin.Context) {
-	c.JSON(http.StatusNotImplemented, &gin.H{
-		"message": "feature not implemented!",
+	id := c.Param("id")
+
+	objectID, err := bson.ObjectIDFromHex(id)
+	if err != nil {
+		log.Println(err)
+		c.JSON(http.StatusNotFound, &gin.H{
+			"message": "data does not exist. invalid id.",
+		})
+		return
+	}
+
+	err = services.DeleteTodo(&models.QueryTodo{ID: objectID})
+	if err != nil {
+		if err.Error() == "not deleted" {
+			c.JSON(http.StatusBadRequest, &gin.H{
+				"message": "cannot delete or not exists.",
+			})
+			return
+		}
+		c.JSON(http.StatusInternalServerError, &gin.H{
+			"message": "cannot access data.",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, &gin.H{
+		"message": "deleted successfully.",
 	})
 }
