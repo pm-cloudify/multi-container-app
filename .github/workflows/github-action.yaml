@@ -1,0 +1,44 @@
+name: Dockerize and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  Dockerize-and-Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Build Image
+        shell: bash
+        run: |
+          docker build -t todos-app ./service 
+          rm ~/Documents/images/server-image.tar || true
+          mkdir -pv ~/Documents/images/
+          docker save -o ~/Documents/images/server-image.tar todos-app:latest
+          ls -lh ~/Documents/images/server-image.tar
+          tar tf ~/Documents/images/server-image.tar
+
+      - name: Setup SSH
+        shell: bash
+        run: |
+          mkdir -p /home/runner/.ssh/
+          touch id_rsa.pem
+          echo -e "${{secrets.SSH_KEY}}" > id_rsa.pem
+          chmod 600 id_rsa.pem
+          echo -e "${{secrets.ProductionHost}}" > inventory.ini
+
+      - name: Install Ansible
+        shell: bash
+        run: |
+          sudo apt update
+          sudo apt install -y ansible
+
+      - name: Deploy with Ansible
+        env:
+          ANSIBLE_USER: ${{ secrets.ANSIBLE_USER }}
+          ANSIBLE_HOST_KEY_CHECKING: False
+        run: |
+          ansible-playbook -i inventory.ini playbook.yaml --private-key id_rsa.pem -u ${{ secrets.ANSIBLE_USER }} --tags deploy

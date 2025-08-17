@@ -14,7 +14,7 @@ RUN --mount=type=cache,target=~/.cache/go-build \
     CGO_ENABLED=0 GOOS=linux go build -o server server.go
 
 # output image for app
-FROM alpine:latest
+FROM scratch:latest
 
 WORKDIR /app
 

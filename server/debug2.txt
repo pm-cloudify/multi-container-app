@@ -1,184 +1,0 @@
-* Uses proxy env variable no_proxy == 'localhost,127.0.0.0/8,::1,novaday.ir,git.novaday.ir'
-* Uses proxy env variable https_proxy == 'http://127.0.0.1:10808/'
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying 127.0.0.1:10808...
-* Connected to 127.0.0.1 (127.0.0.1) port 10808 (#0)
-* allocate connect buffer
-* Establish HTTP proxy tunnel to proxy.golang.org:443
-> CONNECT proxy.golang.org:443 HTTP/1.1
-> Host: proxy.golang.org:443
-> User-Agent: curl/7.88.1
-> Proxy-Connection: Keep-Alive
-> 
-< HTTP/1.1 200 Connection established
-< 
-* CONNECT phase completed
-* CONNECT tunnel established, response 200
-* ALPN: offers h2,http/1.1
-} [5 bytes data]
-* TLSv1.3 (OUT), TLS handshake, Client hello (1):
-} [512 bytes data]
-*  CAfile: /etc/ssl/certs/ca-certificates.crt
-*  CApath: /etc/ssl/certs
-{ [5 bytes data]
-* TLSv1.3 (IN), TLS handshake, Server hello (2):
-{ [122 bytes data]
-* TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
-{ [15 bytes data]
-* TLSv1.3 (IN), TLS handshake, Certificate (11):
-{ [9862 bytes data]
-* TLSv1.3 (IN), TLS handshake, CERT verify (15):
-{ [79 bytes data]
-* TLSv1.3 (IN), TLS handshake, Finished (20):
-{ [52 bytes data]
-* TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
-} [1 bytes data]
-* TLSv1.3 (OUT), TLS handshake, Finished (20):
-} [52 bytes data]
-* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
-* ALPN: server accepted h2
-* Server certificate:
-*  subject: CN=misc-sni.google.com
-*  start date: Jul  7 08:34:33 2025 GMT
-*  expire date: Sep 29 08:34:32 2025 GMT
-*  subjectAltName: host "proxy.golang.org" matched cert's "*.golang.org"
-*  issuer: C=US; O=Google Trust Services; CN=WE2
-*  SSL certificate verify ok.
-} [5 bytes data]
-* using HTTP/2
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0* h2h3 [:method: GET]
-* h2h3 [:path: /github.com/klauspost/compress/@v/v1.13.5.zip]
-* h2h3 [:scheme: https]
-* h2h3 [:authority: proxy.golang.org]
-* h2h3 [user-agent: curl/7.88.1]
-* h2h3 [accept: */*]
-* Using Stream ID: 1 (easy handle 0x558147d2d7a0)
-} [5 bytes data]
-> GET /github.com/klauspost/compress/@v/v1.13.5.zip HTTP/2
-> Host: proxy.golang.org
-> user-agent: curl/7.88.1
-> accept: */*
-> 
-{ [5 bytes data]
-* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
-{ [282 bytes data]
-* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
-{ [282 bytes data]
-* old SSL session ID is stale, removing
-{ [5 bytes data]
-< HTTP/2 302 
-< access-control-allow-origin: *
-< cache-control: public, max-age=10800
-< content-security-policy-report-only: script-src 'none'; form-action 'none'; frame-src 'none'; report-uri https://csp.withgoogle.com/csp/goa-fa2dfb7c_2
-< content-type: application/zip
-< cross-origin-opener-policy: same-origin
-< date: Sun, 17 Aug 2025 13:09:23 GMT
-< etag: "e5b789e486f1e454ef02344c8235a1a4e285d7b8dd801ff8d667fce6309f3355"
-< expires: Sun, 17 Aug 2025 16:09:23 GMT
-< location: https://storage.googleapis.com/proxy-golang-org-prod/6c3669ec5787390a-github.com:klauspost:compress-v1.13.5.zip?Expires=1755522563&GoogleAccessId=gcs-urlsigner-prod%40golang-modproxy.iam.gserviceaccount.com&Signature=sHldewVW5By8HiyZO9kVwNWFDKuqMORxHxm5BG3KDLiixqQc%2FkRra7lz7jnxrr6GVkw5MACu%2FsmbZtTAZ%2FQRxz25D3F65k72ccGWHfRovrVPfaF6huDARBUzdQY%2Fu9TxTn6nWOHSZZOvJAxMZ2RvC8dqnbCoLTgk8zwFuKlDV2JCcigaxrPXY%2BOoJUEr0pjjgQ11VH4o%2BSv8kNZ7GhGQ1SdobVT%2Bp6Symb88FWAKqn8rLhgjfMINymR318ab9sV6LT1IOl436Ac7fSG8rUrVdJMulhwoNOkBdDkACzGQDO2F1RFtRUXIz8OvjRGtlNnJmG3kdOkgfHxCbGmIyNapSg%3D%3D
-< vary: Sec-Fetch-Site
-< vary: Sec-Fetch-Mode
-< vary: Sec-Fetch-Dest
-< x-content-type-options: nosniff
-< x-frame-options: SAMEORIGIN
-< x-xss-protection: 0
-< content-length: 0
-< alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
-< 
-{ [5 bytes data]
-  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0
-* Connection #0 to host 127.0.0.1 left intact
-* Issue another request to this URL: 'https://storage.googleapis.com/proxy-golang-org-prod/6c3669ec5787390a-github.com:klauspost:compress-v1.13.5.zip?Expires=1755522563&GoogleAccessId=gcs-urlsigner-prod%40golang-modproxy.iam.gserviceaccount.com&Signature=sHldewVW5By8HiyZO9kVwNWFDKuqMORxHxm5BG3KDLiixqQc%2FkRra7lz7jnxrr6GVkw5MACu%2FsmbZtTAZ%2FQRxz25D3F65k72ccGWHfRovrVPfaF6huDARBUzdQY%2Fu9TxTn6nWOHSZZOvJAxMZ2RvC8dqnbCoLTgk8zwFuKlDV2JCcigaxrPXY%2BOoJUEr0pjjgQ11VH4o%2BSv8kNZ7GhGQ1SdobVT%2Bp6Symb88FWAKqn8rLhgjfMINymR318ab9sV6LT1IOl436Ac7fSG8rUrVdJMulhwoNOkBdDkACzGQDO2F1RFtRUXIz8OvjRGtlNnJmG3kdOkgfHxCbGmIyNapSg%3D%3D'
-* Uses proxy env variable no_proxy == 'localhost,127.0.0.0/8,::1,novaday.ir,git.novaday.ir'
-* Uses proxy env variable https_proxy == 'http://127.0.0.1:10808/'
-* Hostname 127.0.0.1 was found in DNS cache
-*   Trying 127.0.0.1:10808...
-* Connected to 127.0.0.1 (127.0.0.1) port 10808 (#1)
-* allocate connect buffer
-* Establish HTTP proxy tunnel to storage.googleapis.com:443
-> CONNECT storage.googleapis.com:443 HTTP/1.1
-> Host: storage.googleapis.com:443
-> User-Agent: curl/7.88.1
-> Proxy-Connection: Keep-Alive
-> 
-< HTTP/1.1 200 Connection established
-< 
-* CONNECT phase completed
-* CONNECT tunnel established, response 200
-* ALPN: offers h2,http/1.1
-} [5 bytes data]
-* TLSv1.3 (OUT), TLS handshake, Client hello (1):
-} [512 bytes data]
-*  CAfile: /etc/ssl/certs/ca-certificates.crt
-*  CApath: /etc/ssl/certs
-{ [5 bytes data]
-* TLSv1.3 (IN), TLS handshake, Server hello (2):
-{ [122 bytes data]
-* TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
-{ [15 bytes data]
-* TLSv1.3 (IN), TLS handshake, Certificate (11):
-{ [2528 bytes data]
-* TLSv1.3 (IN), TLS handshake, CERT verify (15):
-{ [80 bytes data]
-* TLSv1.3 (IN), TLS handshake, Finished (20):
-{ [52 bytes data]
-* TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
-} [1 bytes data]
-* TLSv1.3 (OUT), TLS handshake, Finished (20):
-} [52 bytes data]
-* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
-* ALPN: server accepted h2
-* Server certificate:
-*  subject: CN=storage.googleapis.com
-*  start date: Jul  7 08:38:04 2025 GMT
-*  expire date: Sep 29 08:38:03 2025 GMT
-*  subjectAltName: host "storage.googleapis.com" matched cert's "storage.googleapis.com"
-*  issuer: C=US; O=Google Trust Services; CN=WE2
-*  SSL certificate verify ok.
-} [5 bytes data]
-* using HTTP/2
-  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0* h2h3 [:method: GET]
-* h2h3 [:path: /proxy-golang-org-prod/6c3669ec5787390a-github.com:klauspost:compress-v1.13.5.zip?Expires=1755522563&GoogleAccessId=gcs-urlsigner-prod%40golang-modproxy.iam.gserviceaccount.com&Signature=sHldewVW5By8HiyZO9kVwNWFDKuqMORxHxm5BG3KDLiixqQc%2FkRra7lz7jnxrr6GVkw5MACu%2FsmbZtTAZ%2FQRxz25D3F65k72ccGWHfRovrVPfaF6huDARBUzdQY%2Fu9TxTn6nWOHSZZOvJAxMZ2RvC8dqnbCoLTgk8zwFuKlDV2JCcigaxrPXY%2BOoJUEr0pjjgQ11VH4o%2BSv8kNZ7GhGQ1SdobVT%2Bp6Symb88FWAKqn8rLhgjfMINymR318ab9sV6LT1IOl436Ac7fSG8rUrVdJMulhwoNOkBdDkACzGQDO2F1RFtRUXIz8OvjRGtlNnJmG3kdOkgfHxCbGmIyNapSg%3D%3D]
-* h2h3 [:scheme: https]
-* h2h3 [:authority: storage.googleapis.com]
-* h2h3 [user-agent: curl/7.88.1]
-* h2h3 [accept: */*]
-* Using Stream ID: 1 (easy handle 0x558147d2d7a0)
-} [5 bytes data]
-> GET /proxy-golang-org-prod/6c3669ec5787390a-github.com:klauspost:compress-v1.13.5.zip?Expires=1755522563&GoogleAccessId=gcs-urlsigner-prod%40golang-modproxy.iam.gserviceaccount.com&Signature=sHldewVW5By8HiyZO9kVwNWFDKuqMORxHxm5BG3KDLiixqQc%2FkRra7lz7jnxrr6GVkw5MACu%2FsmbZtTAZ%2FQRxz25D3F65k72ccGWHfRovrVPfaF6huDARBUzdQY%2Fu9TxTn6nWOHSZZOvJAxMZ2RvC8dqnbCoLTgk8zwFuKlDV2JCcigaxrPXY%2BOoJUEr0pjjgQ11VH4o%2BSv8kNZ7GhGQ1SdobVT%2Bp6Symb88FWAKqn8rLhgjfMINymR318ab9sV6LT1IOl436Ac7fSG8rUrVdJMulhwoNOkBdDkACzGQDO2F1RFtRUXIz8OvjRGtlNnJmG3kdOkgfHxCbGmIyNapSg%3D%3D HTTP/2
-> Host: storage.googleapis.com
-> user-agent: curl/7.88.1
-> accept: */*
-> 
-{ [5 bytes data]
-* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
-{ [282 bytes data]
-* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
-{ [282 bytes data]
-* old SSL session ID is stale, removing
-{ [5 bytes data]
-< HTTP/2 200 
-< content-type: application/zip
-< x-guploader-uploadid: ABgVH88oBB0kJtyiTMODwYCh8CLsS-73S3h_zA5iiHoqyXNdFItiP_59C22FBu_u7zu2CV8r
-< date: Sun, 17 Aug 2025 13:09:24 GMT
-< cache-control: public,max-age=3600,must-revalidate
-< expires: Sun, 17 Aug 2025 14:09:24 GMT
-< last-modified: Mon, 30 Aug 2021 09:32:35 GMT
-< etag: "561aab884ab8212ba72e8524776e7781"
-< x-goog-generation: 1630315955830500
-< x-goog-metageneration: 1
-< x-goog-stored-content-encoding: identity
-< x-goog-stored-content-length: 15563802
-< content-disposition: attachment; filename="v1.13.5.zip"
-< x-goog-hash: crc32c=BR8sTA==
-< x-goog-hash: md5=VhqriEq4ISunLoUkd253gQ==
-< x-goog-storage-class: MULTI_REGIONAL
-< accept-ranges: bytes
-< content-length: 15563802
-< server: UploadServer
-< alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
-< 
-{ [5 bytes data]
-  0 14.8M    0  110k    0     0  36160      0  0:07:10  0:00:03  0:07:07 92479  1 14.8M    1  298k    0     0  81573      0  0:03:10  0:00:03  0:03:07  162k  4 14.8M    4  726k    0     0   153k      0  0:01:38  0:00:04  0:01:34  257k  7 14.8M    7 1102k    0     0   192k      0  0:01:19  0:00:05  0:01:14  288k 10 14.8M   10 1598k    0     0   237k      0  0:01:03  0:00:06  0:00:57  331k 18 14.8M   18 2800k    0     0   362k      0  0:00:41  0:00:07  0:00:34  585k 26 14.8M   26 4016k    0     0   460k      0  0:00:33  0:00:08  0:00:25  746k 34 14.8M   34 5245k    0     0   539k      0  0:00:28  0:00:09  0:00:19  903k 42 14.8M   42 6399k    0     0   596k      0  0:00:25  0:00:10  0:00:15 1060k 48 14.8M   48 7326k    0     0   624k      0  0:00:24  0:00:11  0:00:13 1145k 56 14.8M   56 8524k    0     0   669k      0  0:00:22  0:00:12  0:00:10 1144k 64 14.8M   64 9740k    0     0   709k      0  0:00:21  0:00:13  0:00:08 1144k 71 14.8M   71 10.6M    0     0   740k      0  0:00:20  0:00:14  0:00:06 1130k 80 14.8M   80 11.9M    0     0   775k      0  0:00:19  0:00:15  0:00:04 1161k 88 14.8M   88 13.1M    0     0   804k      0  0:00:18  0:00:16  0:00:02 1221k 95 14.8M   95 14.2M    0     0   821k      0  0:00:18  0:00:17  0:00:01 1207k100 14.8M  100 14.8M    0     0   832k      0  0:00:18  0:00:18 --:--:-- 1208k
-* Connection #1 to host 127.0.0.1 left intact
