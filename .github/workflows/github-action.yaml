@@ -14,7 +14,7 @@ jobs:
       - name: Build Image
         shell: bash
         run: |
-          docker build -t todos-app ./service 
+          docker build -t todos-app ./server
           rm ~/Documents/images/server-image.tar || true
           mkdir -pv ~/Documents/images/
           docker save -o ~/Documents/images/server-image.tar todos-app:latest
