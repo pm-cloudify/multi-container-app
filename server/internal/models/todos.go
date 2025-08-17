@@ -8,8 +8,13 @@ type QueryTodo struct {
 
 type TODO struct {
 	ID      bson.ObjectID `bson:"_id,omitempty" json:"id"`
-	Title   string        `json:"title"`
-	Content string        `json:"content"`
+	Title   string        `json:"title" xml:"title" form:"title"`
+	Content string        `json:"content" xml:"content" form:"content"`
+}
+
+type NewTodoData struct {
+	Title   string `json:"title" xml:"title" form:"title" bson:"title"`
+	Content string `json:"content" xml:"content" form:"content" bson:"content"`
 }
 
 type Todos struct {

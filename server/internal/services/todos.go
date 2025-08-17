@@ -2,6 +2,7 @@ package services
 
 import (
 	"context"
+	"errors"
 	"log"
 	"time"
 
@@ -85,4 +86,42 @@ func GetTodo(q *models.QueryTodo) (*models.TODO, error) {
 	}
 
 	return &res.Todos[0], nil
+}
+
+func CreateNewTODO(data *models.NewTodoData) error {
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	res, err := getTodosCollection().InsertOne(ctx, data)
+
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+
+	log.Println("created: ", res.InsertedID)
+
+	return nil
+}
+
+func UpdateOneTodo(q *models.QueryTodo, data *models.NewTodoData) error {
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	res, err := getTodosCollection().UpdateOne(ctx, q, data)
+
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+
+	log.Println("modified: ", res.ModifiedCount)
+
+	if res.ModifiedCount == 0 {
+		return errors.New("not modified")
+	}
+
+	return nil
 }

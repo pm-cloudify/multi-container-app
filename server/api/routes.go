@@ -16,7 +16,7 @@ func AttachHandler(router *gin.Engine) {
 		// post
 		router.Handle(http.MethodPost, "/todos", api_handlers.PostTodo)
 		// put
-		router.Handle(http.MethodPost, "/todos/:id", api_handlers.PutTodo)
+		router.Handle(http.MethodPut, "/todos/:id", api_handlers.PutTodo)
 		// delete
 		router.Handle(http.MethodDelete, "/todos/:id", api_handlers.DeleteTodo)
 	}
