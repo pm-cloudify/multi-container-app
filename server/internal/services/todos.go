@@ -107,19 +107,27 @@ func CreateNewTODO(data *models.NewTodoData) error {
 
 func UpdateOneTodo(q *models.QueryTodo, data *models.NewTodoData) error {
 
+	log.Println(q)
+	log.Println(data)
+
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	res, err := getTodosCollection().UpdateOne(ctx, q, data)
+	update := bson.D{
+		{Key: "$set", Value: bson.D{
+			{Key: "title", Value: data.Title},
+			{Key: "content", Value: data.Content},
+		}},
+	}
+
+	res, err := getTodosCollection().UpdateByID(ctx, q.ID, update)
 
 	if err != nil {
 		log.Println(err)
 		return err
 	}
 
-	log.Println("modified: ", res.ModifiedCount)
-
-	if res.ModifiedCount == 0 {
+	if res.MatchedCount == 0 {
 		return errors.New("not modified")
 	}
 
