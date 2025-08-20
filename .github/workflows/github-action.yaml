@@ -20,7 +20,6 @@ jobs:
           docker save -o ~/Documents/images/server-image.tar todos-app:latest
           ls -lh ~/Documents/images/server-image.tar
           tar tf ~/Documents/images/server-image.tar
-
       - name: Setup SSH
         shell: bash
         run: |
@@ -29,14 +28,18 @@ jobs:
           echo -e "${{secrets.SSH_KEY}}" > id_rsa.pem
           chmod 600 id_rsa.pem
           echo -e "${{secrets.ProductionHost}}" > inventory.ini
-
       - name: Install Ansible
         shell: bash
         run: |
           sudo apt update
           sudo apt install -y ansible
-
-      - name: Deploy with Ansible
+      - name: Upload and Unpack
+        env:
+          ANSIBLE_USER: ${{ secrets.ANSIBLE_USER }}
+          ANSIBLE_HOST_KEY_CHECKING: False
+        run: |
+          ansible-playbook -i inventory.ini playbook.yaml --private-key id_rsa.pem -u ${{ secrets.ANSIBLE_USER }} --tags upload
+      - name: Deploy
         env:
           ANSIBLE_USER: ${{ secrets.ANSIBLE_USER }}
           ANSIBLE_HOST_KEY_CHECKING: False
