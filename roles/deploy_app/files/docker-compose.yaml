@@ -1,5 +1,5 @@
 services:
-  mongo:
+  mongodb:
     image: mongo:latest
     container_name: mongodb
     restart: always
@@ -13,9 +13,9 @@ services:
       - mongo-data:/data/db
       - mongo-config:/data/configdb
     networks:
-      - apps-private-network
+      - private-network
 
-  todos_app:
+  todos-app:
     image: todos-app:latest
     container_name: todos-app
     restart: always
@@ -29,11 +29,11 @@ services:
     depends_on:
       - mongodb
     networks:
-      - apps-private-network
+      - private-network
       - external-network
 
 networks:
-  apps-private-network:
+  private-network:
     driver: bridge
     internal: true
   external-network:

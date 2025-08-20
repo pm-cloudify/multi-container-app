@@ -25,4 +25,4 @@ ENV GIN_PORT=8080
 
 EXPOSE 8080
 
-CMD ["./myapp"]
+CMD ["./server"]
