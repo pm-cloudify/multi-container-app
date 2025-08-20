@@ -33,6 +33,13 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y ansible
+      - name: Stop previous app
+        env:
+          ANSIBLE_USER: ${{ secrets.ANSIBLE_USER }}
+          ANSIBLE_HOST_KEY_CHECKING: False
+        run: |
+          ansible-playbook -i inventory.ini playbook.yaml --private-key id_rsa.pem -u ${{ secrets.ANSIBLE_USER }} --tags stop
+
       - name: Upload and Unpack
         env:
           ANSIBLE_USER: ${{ secrets.ANSIBLE_USER }}

@@ -1,0 +1,3 @@
+---
+# vars file for stop_app
+app_name: todos-app

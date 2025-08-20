@@ -1,0 +1,50 @@
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root # test
+      MONGO_INITDB_ROOT_PASSWORD: password # test
+    volumes:
+      - mongo-data:/data/db
+      - mongo-config:/data/configdb
+    networks:
+      - apps-private-network
+
+  todos_app:
+    image: todos-app:latest
+    container_name: todos-app
+    restart: always
+    environment:
+      - GIN_MODE=release
+      - GIN_PORT=80
+      - DATABASE_ADD=mongodb
+    depends_on:
+      - mongodb
+    networks:
+      - apps-private-network
+      - external-network
+
+networks:
+  apps-private-network:
+    driver: bridge
+    internal: true
+  external-network:
+    driver: bridge
+
+volumes:
+  mongo-config:
+    driver: local
+    driver_opts:
+      type: none
+      device: /opt/apps/mongodb/configdb
+      o: bind
+  mongo-data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /opt/apps/mongodb/db
+      o: bind

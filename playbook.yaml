@@ -3,6 +3,8 @@
   roles:
     - role: config_server
       tags: config
+    - role: stop_app
+      tags: stop
     - role: upload_image
       tags: upload
     - role: deploy_app

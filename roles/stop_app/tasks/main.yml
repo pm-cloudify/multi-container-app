@@ -1,0 +1,15 @@
+---
+# tasks file for stop_app
+
+- name: Stop app
+  community.docker.docker_container:
+    name: "{{ app_name }}"
+    state: absent
+    force_kill: true
+    keep_volumes: false
+    auto_remove: true
+  register: container_removal_result
+
+- name: Container Removal Result
+  ansible.builtin.debug:
+    var: container_removal_result

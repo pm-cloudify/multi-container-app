@@ -1,2 +1,4 @@
 ---
 # vars file for upload_image
+src_archived_image_path: ~/Documents/images
+dest_archived_image_path: /opt/images

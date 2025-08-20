@@ -1,2 +1,24 @@
 ---
 # tasks file for upload_image
+
+- name: Make base directory
+  ansible.builtin.file:
+    path: "{{ dest_archived_image_path }}"
+    state: directory
+
+- name: Upload
+  ansible.builtin.copy:
+    src: "{{ src_archived_image_path }}/server-image.tar"
+    dest: "{{ dest_archived_image_path }}/server-image.tar"
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Unpack
+  community.docker.docker_image_load:
+    path: "{{ dest_archived_image_path }}/server-image.tar"
+
+- name: Clean up
+  ansible.builtin.file:
+    path: "{{ dest_archived_image_path }}/server-image.tar"
+    state: absent
