@@ -13,3 +13,10 @@
 - name: Container Removal Result
   ansible.builtin.debug:
     var: container_removal_result
+
+- name: Prune unused images
+  community.docker.docker_prune:
+    networks: true
+    images: true
+    containers: true
+    volumes: false
