@@ -6,6 +6,7 @@ services:
     ports:
       - "27017:27017"
     environment:
+      # TODO: this is for test - pass these as secret
       MONGO_INITDB_ROOT_USERNAME: root # test
       MONGO_INITDB_ROOT_PASSWORD: password # test
     volumes:
@@ -21,7 +22,10 @@ services:
     environment:
       - GIN_MODE=release
       - GIN_PORT=80
-      - DATABASE_ADD=mongodb
+      - MONGODB_ADDR=mongodb
+      # TODO: this is for test - pass these as secret
+      - MONGODB_USER=root
+      - MONGODB_PASS=password
     depends_on:
       - mongodb
     networks:
