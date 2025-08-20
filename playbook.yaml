@@ -1,0 +1,9 @@
+- hosts: deploy
+  become: true
+  roles:
+    - role: config_server
+      tags: config
+    - role: upload_image
+      tags: upload
+    - role: deploy_app
+      tags: deploy
