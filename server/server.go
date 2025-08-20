@@ -18,7 +18,7 @@ func main() {
 	mongodb_user := "root"
 	mongodb_pass := "password"
 
-	if val := os.Getenv("MONGODB_DR"); val != "" {
+	if val := os.Getenv("MONGODB_ADDR"); val != "" {
 		mongodb_addr = val
 	}
 	if val := os.Getenv("GIN_PORT"); val != "" {
