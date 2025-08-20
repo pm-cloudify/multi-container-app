@@ -21,8 +21,5 @@ WORKDIR /app
 COPY --from=builder /app/server .
 
 ENV GIN_MODE=release
-ENV GIN_PORT=8080
-
-EXPOSE 8080
 
 CMD ["./server"]

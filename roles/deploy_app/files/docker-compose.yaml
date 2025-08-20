@@ -19,6 +19,8 @@ services:
     image: todos-app:latest
     container_name: todos-app
     restart: always
+    ports:
+      - "80:80"
     environment:
       - GIN_MODE=release
       - GIN_PORT=80
